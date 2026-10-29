@@ -1,0 +1,45 @@
+<UserControl x:Class="Newtin.Desktop.Controls.ShareConnectionForm"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <StackPanel>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="16"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel>
+                <TextBlock Text="Equipo remoto (IP o nombre)" Style="{StaticResource FieldLabelStyle}" Margin="0,0,0,6"/>
+                <TextBox x:Name="HostBox" Style="{StaticResource InputStyle}"
+                         AutomationProperties.Name="Equipo remoto" TextChanged="Field_Changed"/>
+            </StackPanel>
+            <StackPanel Grid.Column="2">
+                <TextBlock Text="Carpeta compartida (opcional)" Style="{StaticResource FieldLabelStyle}" Margin="0,0,0,6"/>
+                <TextBox x:Name="ShareBox" Style="{StaticResource InputStyle}"
+                         AutomationProperties.Name="Carpeta compartida" TextChanged="Field_Changed"/>
+            </StackPanel>
+        </Grid>
+
+        <TextBlock x:Name="UncPreview" Margin="0,8,0,0" FontSize="12.5"
+                   Foreground="{StaticResource TextSecondaryBrush}"/>
+
+        <TextBlock Text="Modalidad de autenticación" Style="{StaticResource FieldLabelStyle}"/>
+        <RadioButton x:Name="CurrentRadio" Content="Sesión actual de Windows" IsChecked="True" GroupName="AuthMode"
+                     Foreground="{StaticResource TextPrimaryBrush}" Margin="0,2" Checked="Mode_Changed"/>
+        <RadioButton x:Name="CredRadio" Content="Credenciales proporcionadas" GroupName="AuthMode"
+                     Foreground="{StaticResource TextPrimaryBrush}" Margin="0,2" Checked="Mode_Changed"/>
+
+        <StackPanel x:Name="CredPanel" Visibility="Collapsed">
+            <TextBlock Text="Usuario" Style="{StaticResource FieldLabelStyle}"/>
+            <TextBox x:Name="UserBox" Style="{StaticResource InputStyle}" AutomationProperties.Name="Usuario"/>
+
+            <TextBlock Text="Contraseña" Style="{StaticResource FieldLabelStyle}"/>
+            <PasswordBox x:Name="PassBox" Style="{StaticResource InputPasswordStyle}"
+                         AutomationProperties.Name="Contraseña"/>
+
+            <TextBlock Text="La contraseña se usa solo durante esta conexión: no se guarda, no se registra y no se envía al navegador."
+                       FontSize="12" TextWrapping="Wrap" Margin="0,6,0,0"
+                       Foreground="{StaticResource TextSecondaryBrush}"/>
+        </StackPanel>
+    </StackPanel>
+</UserControl>

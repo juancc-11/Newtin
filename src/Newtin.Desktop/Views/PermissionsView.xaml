@@ -1,0 +1,47 @@
+<UserControl x:Class="Newtin.Desktop.Views.PermissionsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controls="clr-namespace:Newtin.Desktop.Controls">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel MaxWidth="900" HorizontalAlignment="Left">
+            <Border Background="{StaticResource SurfaceBrush}" CornerRadius="16" Padding="24" Margin="0,0,0,16">
+                <StackPanel>
+                    <TextBlock Text="¿Dónde quieres probar?" FontSize="16" FontWeight="SemiBold"
+                               Foreground="{StaticResource TextPrimaryBrush}"/>
+                    <RadioButton x:Name="LocalRadio" Content="Carpeta local de Newtin (verifica que la prueba funciona en tu equipo)"
+                                 IsChecked="True" GroupName="Target" Margin="0,10,0,2"
+                                 Foreground="{StaticResource TextPrimaryBrush}" Checked="Target_Changed"/>
+                    <RadioButton x:Name="RemoteRadio" Content="Carpeta compartida de otro equipo"
+                                 GroupName="Target" Margin="0,2"
+                                 Foreground="{StaticResource TextPrimaryBrush}" Checked="Target_Changed"/>
+
+                    <Border x:Name="FormHost" Visibility="Collapsed" Margin="0,12,0,0">
+                        <controls:ShareConnectionForm x:Name="Form"/>
+                    </Border>
+
+                    <TextBlock TextWrapping="Wrap" Margin="0,16,0,0" FontSize="12.5"
+                               Foreground="{StaticResource TextSecondaryBrush}"
+                               Text="La prueba crea una carpeta temporal llamada NewtinTest_…, escribe un archivo, lo lee, lo modifica y luego elimina ambos. No toca ningún otro archivo. Antes de empezar te pediré autorización."/>
+
+                    <TextBlock x:Name="FormError" Visibility="Collapsed" TextWrapping="Wrap" Margin="0,12,0,0"
+                               Foreground="{StaticResource ErrorBrush}"/>
+
+                    <StackPanel Orientation="Horizontal" Margin="0,18,0,0">
+                        <Button x:Name="RunButton" Content="Ejecutar prueba"
+                                Style="{StaticResource PrimaryButtonStyle}" Click="Run_Click"/>
+                        <Button x:Name="CancelButton" Content="Cancelar" Margin="10,0,0,0"
+                                Style="{StaticResource SecondaryButtonStyle}" Visibility="Collapsed"
+                                Click="Cancel_Click"/>
+                    </StackPanel>
+
+                    <ProgressBar x:Name="LoadingBar" IsIndeterminate="True" Height="4" Margin="0,16,0,0"
+                                 BorderThickness="0" Visibility="Collapsed"
+                                 Foreground="{StaticResource MagentaBrush}"
+                                 Background="{StaticResource LineBrush}"/>
+                </StackPanel>
+            </Border>
+
+            <StackPanel x:Name="ResultsPanel"/>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

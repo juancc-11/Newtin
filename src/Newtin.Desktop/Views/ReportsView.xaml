@@ -1,0 +1,88 @@
+<UserControl x:Class="Newtin.Desktop.Views.ReportsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    
+<ScrollViewer VerticalScrollBarVisibility="Auto"
+              HorizontalScrollBarVisibility="Disabled">
+
+    <ScrollViewer.Resources>
+        <Style TargetType="{x:Type ScrollBar}"
+               BasedOn="{StaticResource ModernScrollBarStyle}"/>
+    </ScrollViewer.Resources>
+
+        <StackPanel MaxWidth="900" HorizontalAlignment="Left">
+
+            <Border Background="{StaticResource SurfaceBrush}" CornerRadius="16" Padding="24" Margin="0,0,0,16">
+                <StackPanel>
+                    <TextBlock Text="Resultados de esta sesión" FontSize="16" FontWeight="SemiBold"
+                               Foreground="{StaticResource TextPrimaryBrush}"/>
+                    <TextBlock x:Name="EmptyText" TextWrapping="Wrap" Margin="0,8,0,0" FontSize="13"
+                               Foreground="{StaticResource TextSecondaryBrush}"
+                               Text="Todavía no has ejecutado diagnósticos. Abre los módulos 2 a 10 y vuelve aquí, o usa «Ejecutar diagnósticos locales»."/>
+                    <StackPanel x:Name="ResultsList" Margin="0,10,0,0"/>
+                    <TextBlock x:Name="NotRunText" TextWrapping="Wrap" Margin="0,8,0,0" FontSize="12.5"
+                               Foreground="{StaticResource TextSecondaryBrush}"/>
+
+                    <StackPanel Orientation="Horizontal" Margin="0,14,0,0">
+                        <Button x:Name="RunLocalButton" Content="Ejecutar diagnósticos locales"
+                                Style="{StaticResource SecondaryButtonStyle}" Click="RunLocal_Click"/>
+                        <Button x:Name="CancelButton" Content="Cancelar" Margin="10,0,0,0"
+                                Style="{StaticResource SecondaryButtonStyle}" Visibility="Collapsed"
+                                Click="Cancel_Click"/>
+                    </StackPanel>
+
+                    <ProgressBar x:Name="LoadingBar" IsIndeterminate="True" Height="4" Margin="0,14,0,0"
+                                 BorderThickness="0" Visibility="Collapsed"
+                                 Foreground="{StaticResource MagentaBrush}"
+                                 Background="{StaticResource LineBrush}"/>
+                    <TextBlock x:Name="ErrorText" Visibility="Collapsed" TextWrapping="Wrap" Margin="0,10,0,0"
+                               Foreground="{StaticResource ErrorBrush}"/>
+                </StackPanel>
+            </Border>
+
+            <Border Background="{StaticResource SurfaceBrush}" CornerRadius="16" Padding="24" Margin="0,0,0,16">
+                <StackPanel>
+                    <TextBlock Text="Formato del informe" Style="{StaticResource FieldLabelStyle}" Margin="0,0,0,6"/>
+                    <RadioButton x:Name="FormatTxt" Content="Texto (.txt)" IsChecked="True" GroupName="ReportFormat"
+                                 Foreground="{StaticResource TextPrimaryBrush}" Margin="0,2"/>
+                    <RadioButton x:Name="FormatJson" Content="JSON (.json)" GroupName="ReportFormat"
+                                 Foreground="{StaticResource TextPrimaryBrush}" Margin="0,2"/>
+                    <RadioButton x:Name="FormatHtml" Content="Visual para compartir o imprimir (.html)" GroupName="ReportFormat"
+                                 Foreground="{StaticResource TextPrimaryBrush}" Margin="0,2"/>
+                    <RadioButton x:Name="FormatBoth" Content="Texto y JSON" GroupName="ReportFormat"
+                                 Foreground="{StaticResource TextPrimaryBrush}" Margin="0,2"/>
+
+                    <CheckBox x:Name="RedactMacCheck" IsChecked="True" Margin="0,14,0,0"
+                              Foreground="{StaticResource TextPrimaryBrush}"
+                              Content="Ocultar direcciones MAC (recomendado si vas a compartir el informe)"/>
+
+                    <TextBlock TextWrapping="Wrap" FontSize="12" Margin="0,10,0,0"
+                               Foreground="{StaticResource TextSecondaryBrush}"
+                               Text="El informe nunca incluye contraseñas, códigos de acceso ni el texto de los mensajes del registro de eventos. Se guarda en tu carpeta de datos de Newtin."/>
+
+                    <StackPanel Orientation="Horizontal" Margin="0,16,0,0">
+                        <Button x:Name="GenerateButton" Content="Generar y mostrar informe"
+                                Style="{StaticResource PrimaryButtonStyle}" Click="Generate_Click"/>
+                        <Button Content="Abrir carpeta de informes" Margin="10,0,0,0"
+                                Style="{StaticResource SecondaryButtonStyle}" Click="OpenFolder_Click"/>
+                    </StackPanel>
+
+                    <TextBlock x:Name="MessageText" Visibility="Collapsed" TextWrapping="Wrap" Margin="0,14,0,0"/>
+                </StackPanel>
+            </Border>
+
+            <Border Background="{StaticResource SurfaceBrush}" CornerRadius="16" Padding="24">
+                <StackPanel>
+                    <TextBlock Text="Informes recientes" FontSize="16" FontWeight="SemiBold"
+                               Foreground="{StaticResource TextPrimaryBrush}"/>
+                    <TextBlock Text="Selecciona un informe para abrirlo. Los informes visuales se abren en el navegador y pueden imprimirse o guardarse como PDF."
+                               Margin="0,6,0,0" TextWrapping="Wrap" FontSize="12"
+                               Foreground="{StaticResource TextSecondaryBrush}"/>
+                    <TextBlock x:Name="NoRecentText" Text="Todavía no hay informes guardados." Margin="0,8,0,0"
+                               FontSize="13" Foreground="{StaticResource TextSecondaryBrush}"/>
+                    <StackPanel x:Name="RecentList" Margin="0,10,0,0"/>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

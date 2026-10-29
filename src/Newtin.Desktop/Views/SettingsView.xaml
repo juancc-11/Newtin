@@ -1,0 +1,55 @@
+<UserControl x:Class="Newtin.Desktop.Views.SettingsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Border Background="{StaticResource SurfaceBrush}" CornerRadius="16" Padding="24"
+                MaxWidth="640" HorizontalAlignment="Left" VerticalAlignment="Top">
+            <StackPanel>
+                <TextBlock Text="Equipo remoto" FontSize="16" FontWeight="SemiBold"
+                           Foreground="{StaticResource TextPrimaryBrush}"/>
+
+                <TextBlock Text="Dirección IP o nombre del equipo" Style="{StaticResource FieldLabelStyle}"/>
+                <TextBox x:Name="HostBox" Style="{StaticResource InputStyle}"
+                         AutomationProperties.Name="Dirección IP o nombre del equipo remoto"/>
+
+                <TextBlock Text="Carpeta compartida (opcional)" Style="{StaticResource FieldLabelStyle}"/>
+                <TextBox x:Name="ShareBox" Style="{StaticResource InputStyle}"
+                         AutomationProperties.Name="Nombre de la carpeta compartida"/>
+
+                <TextBlock Text="Usuario de red (opcional)" Style="{StaticResource FieldLabelStyle}"/>
+                <TextBox x:Name="UserBox" Style="{StaticResource InputStyle}"
+                         AutomationProperties.Name="Usuario de red"/>
+
+                <TextBlock Text="La contraseña nunca se guarda: se te pedirá al conectar con credenciales."
+                           FontSize="12" TextWrapping="Wrap" Margin="0,6,0,0"
+                           Foreground="{StaticResource TextSecondaryBrush}"/>
+
+                <TextBlock Text="Tiempo de espera (segundos)" Style="{StaticResource FieldLabelStyle}"/>
+                <TextBox x:Name="TimeoutBox" Style="{StaticResource InputStyle}" Width="120" HorizontalAlignment="Left"
+                         AutomationProperties.Name="Tiempo de espera en segundos"/>
+
+                <TextBlock Text="Puerto del servidor de la pizarra" Style="{StaticResource FieldLabelStyle}"/>
+                <TextBox x:Name="PortBox" Style="{StaticResource InputStyle}" Width="120" HorizontalAlignment="Left"
+                         AutomationProperties.Name="Puerto del servidor de la pizarra"/>
+
+                <TextBlock x:Name="MessageText" Visibility="Collapsed" TextWrapping="Wrap" Margin="0,18,0,0"/>
+                    <CheckBox x:Name="LanCheck" Margin="0,16,0,0" Foreground="{StaticResource TextPrimaryBrush}"
+                          Content="Permitir que otros equipos de la red local se conecten a la pizarra"/>
+                    <CheckBox x:Name="RestoreCheck" Margin="0,12,0,0" Foreground="{StaticResource TextPrimaryBrush}"
+                          Content="Restaurar la última pizarra al abrir Newtin"/>
+
+                <TextBlock Text="Dirección de este equipo para la red local (opcional)" Style="{StaticResource FieldLabelStyle}"/>
+                <TextBox x:Name="LanAddressBox" Style="{StaticResource InputStyle}"
+                         AutomationProperties.Name="Dirección de este equipo para la red local"/>
+                <TextBlock x:Name="DetectedText" FontSize="12" TextWrapping="Wrap" Margin="0,6,0,0"
+                           Foreground="{StaticResource TextSecondaryBrush}"/>
+
+                <StackPanel Orientation="Horizontal" Margin="0,18,0,0">
+                    <Button Content="Guardar" Style="{StaticResource PrimaryButtonStyle}" Click="Save_Click"/>
+                    <Button Content="Descartar cambios" Margin="10,0,0,0"
+                            Style="{StaticResource SecondaryButtonStyle}" Click="Discard_Click"/>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+    </ScrollViewer>
+</UserControl>

@@ -1,0 +1,60 @@
+<UserControl x:Class="Newtin.Desktop.Views.WhiteboardView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0">
+            <WrapPanel Margin="0,0,0,8">
+                <Button x:Name="ToggleButton" Style="{StaticResource PrimaryButtonStyle}"
+                        Margin="0,0,10,10" Click="Toggle_Click"/>
+                <Button x:Name="BoardButton" Content="Ver pizarra aquí"
+                        Style="{StaticResource SecondaryButtonStyle}" Margin="0,0,10,10" Click="Board_Click"/>
+                <Button x:Name="OpenButton" Content="Abrir en el navegador"
+                        Style="{StaticResource SecondaryButtonStyle}" Margin="0,0,10,10" Click="Open_Click"/>
+                <Button x:Name="CopyLinkButton" Content="Copiar enlace con código"
+                        Style="{StaticResource SecondaryButtonStyle}" Margin="0,0,10,10" Click="CopyLink_Click"/>
+                <Button x:Name="CopyCodeButton" Content="Copiar código"
+                        Style="{StaticResource SecondaryButtonStyle}" Margin="0,0,10,10" Click="CopyCode_Click"/>
+            </WrapPanel>
+
+            <WrapPanel Margin="0,0,0,8">
+                <TextBlock Text="Archivo:" VerticalAlignment="Center" Margin="0,0,10,10"
+                           Foreground="{StaticResource TextSecondaryBrush}"/>
+                <Button Content="Guardar como…" Style="{StaticResource SecondaryButtonStyle}"
+                        Margin="0,0,10,10" Click="FileSaveAs_Click"/>
+                <Button Content="Abrir…" Style="{StaticResource SecondaryButtonStyle}"
+                        Margin="0,0,10,10" Click="FileOpen_Click"/>
+                <Button Content="Exportar…" Style="{StaticResource SecondaryButtonStyle}"
+                        Margin="0,0,10,10" Click="FileExport_Click"/>
+                <Button Content="Importar…" Style="{StaticResource SecondaryButtonStyle}"
+                        Margin="0,0,10,10" Click="FileImport_Click"/>
+                <Button Content="Nueva pizarra" Style="{StaticResource SecondaryButtonStyle}"
+                        Margin="0,0,10,10" Click="FileNew_Click"/>
+            </WrapPanel>
+
+            <TextBlock x:Name="MessageText" Visibility="Collapsed" TextWrapping="Wrap" Margin="0,0,0,8"/>
+        </StackPanel>
+
+        <ScrollViewer x:Name="InfoScroll" Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <StackPanel MaxWidth="900" HorizontalAlignment="Left">
+                <StackPanel x:Name="SectionsPanel"/>
+
+                <Border Background="{StaticResource SurfaceBrush}" CornerRadius="12" Padding="18">
+                    <StackPanel>
+                        <TextBlock Text="Cómo conectar desde otro equipo" FontSize="15" FontWeight="SemiBold"
+                                   Foreground="{StaticResource TextPrimaryBrush}" Margin="0,0,0,8"/>
+                        <TextBlock TextWrapping="Wrap" FontSize="13" Foreground="{StaticResource TextSecondaryBrush}"
+                                   Text="1. Activa «Permitir que otros equipos de la red local…» en Configuración e inicia el servidor.&#10;2. En el navegador del otro equipo escribe la dirección para otros equipos.&#10;3. Escribe tu nombre y el código de acceso.&#10;La primera vez, Windows puede mostrar un aviso del Firewall: permite el acceso solo en redes privadas.&#10;La conexión es HTTP sin cifrar: úsala solo en tu red local de pruebas."/>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </ScrollViewer>
+
+        <!-- La pizarra incrustada (WebView2) se crea por código al pedirla -->
+        <Grid x:Name="BoardHost" Grid.Row="1" Visibility="Collapsed"/>
+    </Grid>
+</UserControl>

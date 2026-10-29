@@ -1,0 +1,33 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Color x:Key="NewtinRed">#E60033</Color>
+    <Color x:Key="NewtinMagenta">#A00082</Color>
+    <Color x:Key="NewtinPurple">#5420A8</Color>
+    <Color x:Key="BackgroundColor">#17131F</Color>
+    <Color x:Key="SurfaceColor">#241E2D</Color>
+    <Color x:Key="SurfaceHoverColor">#2F2839</Color>
+    <Color x:Key="LineColor">#3A3246</Color>
+    <Color x:Key="TextPrimaryColor">#FFFFFF</Color>
+    <Color x:Key="TextSecondaryColor">#C7C0D2</Color>
+    <Color x:Key="SuccessColor">#2EBD85</Color>
+    <Color x:Key="WarningColor">#F2B544</Color>
+    <Color x:Key="ErrorColor">#F05A67</Color>
+
+    <SolidColorBrush x:Key="BackgroundBrush" Color="{StaticResource BackgroundColor}"/>
+    <SolidColorBrush x:Key="SurfaceBrush" Color="{StaticResource SurfaceColor}"/>
+    <SolidColorBrush x:Key="SurfaceHoverBrush" Color="{StaticResource SurfaceHoverColor}"/>
+    <SolidColorBrush x:Key="LineBrush" Color="{StaticResource LineColor}"/>
+    <SolidColorBrush x:Key="MagentaBrush" Color="{StaticResource NewtinMagenta}"/>
+    <SolidColorBrush x:Key="TextPrimaryBrush" Color="{StaticResource TextPrimaryColor}"/>
+    <SolidColorBrush x:Key="TextSecondaryBrush" Color="{StaticResource TextSecondaryColor}"/>
+    <SolidColorBrush x:Key="SuccessBrush" Color="{StaticResource SuccessColor}"/>
+    <SolidColorBrush x:Key="WarningBrush" Color="{StaticResource WarningColor}"/>
+    <SolidColorBrush x:Key="ErrorBrush" Color="{StaticResource ErrorColor}"/>
+
+    <LinearGradientBrush x:Key="BrandGradientBrush" StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Color="{StaticResource NewtinRed}" Offset="0"/>
+        <GradientStop Color="{StaticResource NewtinMagenta}" Offset="0.5"/>
+        <GradientStop Color="{StaticResource NewtinPurple}" Offset="1"/>
+    </LinearGradientBrush>
+</ResourceDictionary>

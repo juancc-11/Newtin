@@ -1,0 +1,47 @@
+<UserControl x:Class="Newtin.Desktop.Views.PortsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel MaxWidth="900" HorizontalAlignment="Left">
+            <Border Background="{StaticResource SurfaceBrush}" CornerRadius="16" Padding="24" Margin="0,0,0,16">
+                <StackPanel>
+                    <TextBlock Text="Equipo remoto (IP o nombre)" Style="{StaticResource FieldLabelStyle}" Margin="0,0,0,6"/>
+                    <TextBox x:Name="HostBox" Style="{StaticResource InputStyle}"
+                             AutomationProperties.Name="Equipo remoto"/>
+
+                    <TextBlock Text="Puertos a comprobar" Style="{StaticResource FieldLabelStyle}"/>
+                    <CheckBox x:Name="SmbCheck" Content="445 · SMB (carpetas compartidas)" IsChecked="True"
+                              Foreground="{StaticResource TextPrimaryBrush}" Margin="0,2"/>
+                    <CheckBox x:Name="HttpCheck" Content="80 · HTTP"
+                              Foreground="{StaticResource TextPrimaryBrush}" Margin="0,2"/>
+                    <CheckBox x:Name="HttpsCheck" Content="443 · HTTPS"
+                              Foreground="{StaticResource TextPrimaryBrush}" Margin="0,2"/>
+                    <CheckBox x:Name="ServerCheck" IsChecked="True"
+                              Foreground="{StaticResource TextPrimaryBrush}" Margin="0,2"/>
+
+                    <TextBlock Text="Puerto adicional (opcional)" Style="{StaticResource FieldLabelStyle}"/>
+                    <TextBox x:Name="CustomPortBox" Style="{StaticResource InputStyle}" Width="140"
+                             HorizontalAlignment="Left" AutomationProperties.Name="Puerto adicional"/>
+
+                    <TextBlock x:Name="FormError" Visibility="Collapsed" TextWrapping="Wrap" Margin="0,12,0,0"
+                               Foreground="{StaticResource ErrorBrush}"/>
+
+                    <StackPanel Orientation="Horizontal" Margin="0,18,0,0">
+                        <Button x:Name="RunButton" Content="Comprobar puertos"
+                                Style="{StaticResource PrimaryButtonStyle}" Click="Run_Click"/>
+                        <Button x:Name="CancelButton" Content="Cancelar" Margin="10,0,0,0"
+                                Style="{StaticResource SecondaryButtonStyle}" Visibility="Collapsed"
+                                Click="Cancel_Click"/>
+                    </StackPanel>
+
+                    <ProgressBar x:Name="LoadingBar" IsIndeterminate="True" Height="4" Margin="0,16,0,0"
+                                 BorderThickness="0" Visibility="Collapsed"
+                                 Foreground="{StaticResource MagentaBrush}"
+                                 Background="{StaticResource LineBrush}"/>
+                </StackPanel>
+            </Border>
+
+            <StackPanel x:Name="ResultsPanel"/>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

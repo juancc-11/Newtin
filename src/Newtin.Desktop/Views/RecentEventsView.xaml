@@ -1,0 +1,93 @@
+
+<UserControl x:Class="Newtin.Desktop.Views.RecentEventsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto"
+                  HorizontalScrollBarVisibility="Disabled">
+
+        <ScrollViewer.Resources>
+            <Style TargetType="{x:Type ScrollBar}"
+                   BasedOn="{StaticResource ModernScrollBarStyle}"/>
+        </ScrollViewer.Resources>
+
+        <StackPanel MaxWidth="900"
+                    HorizontalAlignment="Left">
+
+            <Border Background="{StaticResource SurfaceBrush}"
+                    CornerRadius="16"
+                    Padding="24"
+                    Margin="0,0,0,16">
+
+                <StackPanel>
+                    <TextBlock Text="Período"
+                               Style="{StaticResource FieldLabelStyle}"
+                               Margin="0,0,0,6"/>
+
+                    <RadioButton x:Name="Period24"
+                                 Content="Últimas 24 horas"
+                                 IsChecked="True"
+                                 GroupName="Period"
+                                 Foreground="{StaticResource TextPrimaryBrush}"
+                                 Margin="0,2"/>
+
+                    <RadioButton x:Name="Period7"
+                                 Content="Últimos 7 días"
+                                 GroupName="Period"
+                                 Foreground="{StaticResource TextPrimaryBrush}"
+                                 Margin="0,2"/>
+
+                    <RadioButton x:Name="Period30"
+                                 Content="Últimos 30 días"
+                                 GroupName="Period"
+                                 Foreground="{StaticResource TextPrimaryBrush}"
+                                 Margin="0,2"/>
+
+                    <CheckBox x:Name="WarningsCheck"
+                              Content="Incluir advertencias (además de errores y eventos críticos)"
+                              Foreground="{StaticResource TextPrimaryBrush}"
+                              Margin="0,14,0,0"/>
+
+                    <TextBlock TextWrapping="Wrap"
+                               FontSize="12"
+                               Margin="0,12,0,0"
+                               Foreground="{StaticResource TextSecondaryBrush}"
+                               Text="Se leen los registros Sistema y Aplicación con tu usuario actual. El registro de Seguridad requiere administrador y no se consulta. Las descripciones se muestran solo aquí: no se guardan en el log de Newtin."/>
+
+                    <StackPanel Orientation="Horizontal"
+                                Margin="0,18,0,0">
+
+                        <Button x:Name="RunButton"
+                                Content="Consultar eventos"
+                                Style="{StaticResource PrimaryButtonStyle}"
+                                Click="Run_Click"/>
+
+                        <Button x:Name="CancelButton"
+                                Content="Cancelar"
+                                Margin="10,0,0,0"
+                                Style="{StaticResource SecondaryButtonStyle}"
+                                Visibility="Collapsed"
+                                Click="Cancel_Click"/>
+                    </StackPanel>
+
+                    <ProgressBar x:Name="LoadingBar"
+                                 IsIndeterminate="True"
+                                 Height="4"
+                                 Margin="0,16,0,0"
+                                 BorderThickness="0"
+                                 Visibility="Collapsed"
+                                 Foreground="{StaticResource MagentaBrush}"
+                                 Background="{StaticResource LineBrush}"/>
+
+                    <TextBlock x:Name="ErrorText"
+                               Visibility="Collapsed"
+                               TextWrapping="Wrap"
+                               Margin="0,12,0,0"
+                               Foreground="{StaticResource ErrorBrush}"/>
+                </StackPanel>
+            </Border>
+
+            <StackPanel x:Name="ResultsPanel"/>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

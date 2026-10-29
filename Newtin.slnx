@@ -1,0 +1,15 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Newtin.Core/Newtin.Core.csproj" />
+    <Project Path="src/Newtin.Desktop/Newtin.Desktop.csproj" />
+    <Project Path="src/Newtin.Diagnostics/Newtin.Diagnostics.csproj" />
+    <Project Path="src/Newtin.Infrastructure/Newtin.Infrastructure.csproj" />
+    <Project Path="src/Newtin.Server/Newtin.Server.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Newtin.Core.Tests/Newtin.Core.Tests.csproj" />
+    <Project Path="tests/Newtin.Diagnostics.Tests/Newtin.Diagnostics.Tests.csproj" />
+    <Project Path="tests/Newtin.Infrastructure.Tests/Newtin.Infrastructure.Tests.csproj" />
+    <Project Path="tests/Newtin.Server.Tests/Newtin.Server.Tests.csproj" />
+  </Folder>
+</Solution>

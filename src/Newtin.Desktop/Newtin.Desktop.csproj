@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\Newtin.Core\Newtin.Core.csproj" />
+    <ProjectReference Include="..\Newtin.Diagnostics\Newtin.Diagnostics.csproj" />
+    <ProjectReference Include="..\Newtin.Infrastructure\Newtin.Infrastructure.csproj" />
+    <ProjectReference Include="..\Newtin.Server\Newtin.Server.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.4314.35" />
+    <PackageReference Include="WpfAnimatedGif" Version="2.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\Images\*.png" />
+    <Resource Include="Resources\Animations\*.gif" />
+    <Resource Include="Resources\Icons\*.ico" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <Version>0.1.0</Version>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+
+    <ApplicationIcon>Resources\Icons\newtin.ico</ApplicationIcon>
+
+  </PropertyGroup>
+
+</Project>

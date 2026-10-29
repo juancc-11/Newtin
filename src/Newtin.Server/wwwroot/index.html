@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Newtin · Pizarra colaborativa</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <section id="login" class="login">
+    <div class="card">
+      <div class="logo-panel">
+        <img class="logo" src="assets/logo.png" alt="Logo de Newtin">
+      </div>
+      <p class="subtitle">Pizarra colaborativa</p>
+
+      <form id="join-form" autocomplete="off">
+        <label for="name">Tu nombre</label>
+        <input id="name" maxlength="30" required>
+
+        <label for="code">Código de acceso</label>
+        <input id="code" maxlength="12" required spellcheck="false" autocapitalize="characters">
+
+        <button type="submit" id="join-button" class="primary">Conectar</button>
+      </form>
+
+      <p id="login-error" class="error" role="alert" hidden></p>
+    </div>
+  </section>
+
+  <div id="app" hidden>
+    <header class="topbar">
+      <div class="brand">Newtin <span>Pizarra</span></div>
+
+      <div id="status" class="status" data-kind="idle" role="status" aria-live="polite">
+        <span class="dot"></span>
+        <span id="status-text">Desconectado</span>
+      </div>
+
+      <div class="topbar-actions">
+        <span class="participants">Participantes: <strong id="clients-count">0</strong></span>
+        <button id="export-button" type="button" disabled>Exportar</button>
+        <button id="clear-button" type="button" class="danger">Limpiar pizarra</button>
+        <button id="leave-button" type="button">Salir</button>
+      </div>
+    </header>
+
+    <div id="banner" class="banner" hidden>
+      <span id="banner-text"></span>
+      <button id="reconnect-button" type="button" hidden>Volver a conectar</button>
+    </div>
+
+    <div class="workspace">
+      <aside class="toolbar" aria-label="Herramientas">
+        <h2>Herramientas</h2>
+        
+<div class="tools">
+  <button type="button" data-tool="pen" aria-pressed="true"
+          aria-label="Lápiz" title="Lápiz">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 19 7-7 3 3-7 7-3-3Z"/><path d="m18 13-3-3"/><path d="m2 22 4-1 11-11a2.1 2.1 0 0 0-3-3L3 18l-1 4Z"/></svg>
+  </button>
+
+  <button type="button" data-tool="line" aria-pressed="false"
+          aria-label="Línea" title="Línea">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19 19 5"/><circle cx="5" cy="19" r="2"/><circle cx="19" cy="5" r="2"/></svg>
+  </button>
+
+  <button type="button" data-tool="arrow" aria-pressed="false"
+          aria-label="Flecha" title="Flecha">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19 19 5"/><path d="M9 5h10v10"/></svg>
+  </button>
+
+  <button type="button" data-tool="rect" aria-pressed="false"
+          aria-label="Rectángulo" title="Rectángulo">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="14" rx="2"/></svg>
+  </button>
+
+  <button type="button" data-tool="ellipse" aria-pressed="false"
+          aria-label="Elipse" title="Elipse">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><ellipse cx="12" cy="12" rx="9" ry="6"/></svg>
+  </button>
+
+  <button type="button" data-tool="text" aria-pressed="false"
+          aria-label="Texto" title="Texto">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7V4h16v3"/><path d="M9 20h6"/><path d="M12 4v16"/></svg>
+  </button>
+
+  <button type="button" data-tool="note" aria-pressed="false"
+          aria-label="Nota adhesiva" title="Nota adhesiva">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3h14v13l-5 5H5z"/><path d="M14 21v-5h5"/></svg>
+  </button>
+
+  <button type="button" data-tool="eraser" aria-pressed="false"
+          aria-label="Borrador" title="Borrador">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m7 21-4-4a2 2 0 0 1 0-3l9-9a2 2 0 0 1 3 0l6 6a2 2 0 0 1 0 3l-7 7Z"/><path d="m7 21 8-8"/></svg>
+  </button>
+
+  <button type="button" data-tool="select" aria-pressed="false"
+          aria-label="Seleccionar" title="Seleccionar">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 3 14 10-7 1-3 7Z"/></svg>
+  </button>
+
+  <button type="button" data-tool="hand" aria-pressed="false"
+          aria-label="Mover vista" title="Mover vista">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2v20M2 12h20"/><path d="m8 6 4-4 4 4M8 18l4 4 4-4M6 8l-4 4 4 4M18 8l4 4-4 4"/></svg>
+  </button>
+</div>
+
+
+        <div id="color-options">
+          <h3>Color</h3>
+          <div id="color-palette" class="palette"></div>
+          <label class="inline" for="custom-color">Otro color
+            <input id="custom-color" type="color" value="#17131f">
+          </label>
+        </div>
+
+        <div id="width-options">
+          <h3><label for="width">Grosor: <span id="width-value">4</span></label></h3>
+          <input id="width" type="range" min="1" max="24" value="4">
+        </div>
+
+        <div id="text-options" hidden>
+          <h3><label for="font-size">Tamaño del texto: <span id="font-size-value">28</span></label></h3>
+          <input id="font-size" type="range" min="12" max="96" step="2" value="28">
+          <p class="hint">Haz clic en la pizarra, escribe y pulsa Ctrl + Intro (o haz clic fuera) para fijar el texto. Con «Seleccionar», doble clic para editarlo.</p>
+        </div>
+
+        <div id="note-options" hidden>
+          <h3>Color de la nota</h3>
+          <div id="note-palette" class="palette"></div>
+          <p class="hint">Haz clic en la pizarra para crear la nota.</p>
+        </div>
+
+
+<h3>Historial</h3>
+<div class="pair icon-actions">
+  <button id="undo-button" type="button" disabled
+          aria-label="Deshacer" title="Deshacer">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 14 4 9l5-5"/><path d="M4 9h10a6 6 0 0 1 0 12h-3"/></svg>
+  </button>
+
+  <button id="redo-button" type="button" disabled
+          aria-label="Rehacer" title="Rehacer">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 14 5-5-5-5"/><path d="M20 9H10a6 6 0 0 0 0 12h3"/></svg>
+  </button>
+</div>
+
+<h3>Vista</h3>
+<div class="pair icon-actions">
+  <button id="zoom-out" type="button"
+          aria-label="Alejar" title="Alejar">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M8 11h6M16 16l5 5"/></svg>
+  </button>
+
+  <button id="zoom-reset" type="button"
+          aria-label="Restablecer zoom al 100 por ciento"
+          title="Restablecer zoom">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11a9 9 0 1 1 2.6 6.4"/><path d="M3 4v7h7"/><path d="M9 10h6M12 7v10"/></svg>
+  </button>
+
+  <button id="zoom-in" type="button"
+          aria-label="Acercar" title="Acercar">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M8 11h6M11 8v6M16 16l5 5"/></svg>
+  </button>
+</div>
+
+<button id="zoom-fit" type="button"
+        class="icon-text-button"
+        title="Ajustar a la ventana">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M3 16v3a2 2 0 0 0 2 2h3M21 16v3a2 2 0 0 1-2 2h-3"/></svg>
+  <span>Ajustar a la ventana</span>
+</button>
+
+<p class="hint">Ctrl + rueda: zoom. Espacio + arrastrar, botón central o «Mover vista»: desplazar.</p>
+
+<button id="delete-selection" type="button" disabled
+        class="icon-text-button"
+        title="Eliminar selección">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/><path d="M10 11v5M14 11v5"/></svg>
+  <span>Eliminar selección</span>
+</button>
+
+      </aside>
+
+      <main id="viewport" class="board-wrap">
+        <div id="board-sizer" class="board-sizer">
+          <div id="stage" class="board">
+            <canvas id="canvas" role="img" aria-label="Lienzo de la pizarra"></canvas>
+            <div id="notes-layer"></div>
+          </div>
+        </div>
+      </main>
+
+      <aside class="sidebar" aria-label="Participantes y categorías">
+        <h2>Participantes</h2>
+        <ul id="clients-list" class="plain-list"></ul>
+
+        <h2>Categorías</h2>
+        <p class="hint">Elige una para las notas nuevas.</p>
+        <ul id="categories-list" class="plain-list"></ul>
+
+        <form id="category-form" autocomplete="off">
+          <label for="category-name">Nueva categoría</label>
+          <div class="row">
+            <input id="category-name" maxlength="40" placeholder="Nombre">
+            <input id="category-color" type="color" value="#a00082" aria-label="Color de la nueva categoría">
+          </div>
+          <button type="submit">Añadir</button>
+        </form>
+      </aside>
+    </div>
+
+    <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+  </div>
+ <!-- Modal personalizado para limpiar la pizarra -->
+<div id="clear-modal" class="custom-modal" hidden>
+  <div class="modal-backdrop"></div>
+
+  <section class="modal-card"
+           role="alertdialog"
+           aria-modal="true"
+           aria-labelledby="clear-modal-title"
+           aria-describedby="clear-modal-description">
+
+    <div class="modal-icon">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/>
+        <path d="M10 11v5M14 11v5"/>
+      </svg>
+    </div>
+
+    <h2 id="clear-modal-title">¿Limpiar la pizarra?</h2>
+
+    <p id="clear-modal-description">
+      Se eliminará el contenido actual de la pizarra.
+      Esta acción no se puede deshacer.
+    </p>
+
+    <div class="modal-actions">
+      <button id="cancel-clear" type="button" class="modal-cancel">
+        Cancelar
+      </button>
+
+      <button id="confirm-clear" type="button" class="modal-confirm">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/>
+          <path d="M10 11v5M14 11v5"/>
+        </svg>
+        Sí
+      </button>
+    </div>
+  </section>
+</div>
+
+<!-- Modal personalizado para eliminar una categoría -->
+<div id="delete-category-modal" class="custom-modal" hidden>
+  <div class="modal-backdrop"></div>
+
+  <section class="modal-card"
+           role="alertdialog"
+           aria-modal="true"
+           aria-labelledby="delete-category-title"
+           aria-describedby="delete-category-description">
+
+    <div class="modal-icon">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M4 7h16M10 11v6M14 11v6"/>
+        <path d="M5 7l1 14h12l1-14M9 7V4h6v3"/>
+      </svg>
+    </div>
+
+    <h2 id="delete-category-title">¿Eliminar categoría?</h2>
+
+    <p id="delete-category-description">
+      ¿Estás seguro de eliminar esta categoría?
+    </p>
+
+    <div class="modal-actions">
+      <button id="cancel-delete-category"
+              type="button"
+              class="modal-cancel">
+        Cancelar
+      </button>
+
+      <button id="confirm-delete-category"
+              type="button"
+              class="modal-confirm">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M4 7h16M10 11v6M14 11v6"/>
+          <path d="M5 7l1 14h12l1-14M9 7V4h6v3"/>
+        </svg>
+        Sí
+      </button>
+    </div>
+  </section>
+</div>
+
+<!-- Modal para exportar la pizarra -->
+<div id="export-modal" class="custom-modal" hidden>
+  <div class="modal-backdrop"></div>
+
+  <section class="modal-card"
+           role="dialog"
+           aria-modal="true"
+           aria-labelledby="export-modal-title">
+
+    <div class="modal-icon export-icon">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M12 3v12"/>
+        <path d="m7 10 5 5 5-5"/>
+        <path d="M5 21h14"/>
+      </svg>
+    </div>
+
+    <h2 id="export-modal-title">Exportar pizarra</h2>
+    <p>Elige el formato. El archivo se descargará en este equipo.</p>
+
+    <div class="export-options">
+      <button type="button" data-export="png"><span>PNG</span><small>Imagen</small></button>
+      <button type="button" data-export="svg"><span>SVG</span><small>Imagen vectorial</small></button>
+      <button type="button" data-export="markdown"><span>Markdown</span><small>Notas y textos</small></button>
+      <button type="button" data-export="csv"><span>CSV</span><small>Tabla de notas</small></button>
+      <button type="button" data-export="newtin"><span>.newtin</span><small>Copia completa</small></button>
+    </div>
+
+    <p id="export-status" data-export-status role="status" aria-live="polite"></p>
+
+    <div class="modal-actions">
+      <button type="button" class="modal-cancel" data-export-close>Cerrar</button>
+    </div>
+  </section>
+</div>
+
+  <script src="js/export.js"></script>
+  <script src="js/signalr.min.js"></script>
+  <script src="js/connection.js"></script>
+  <script src="js/whiteboard.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

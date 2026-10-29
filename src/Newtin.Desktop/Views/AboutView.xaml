@@ -1,0 +1,76 @@
+<UserControl x:Class="Newtin.Desktop.Views.AboutView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:gif="http://wpfanimatedgif.codeplex.com">
+    <Grid>
+        <Border Width="740" Height="560" MaxWidth="900" MaxHeight="700"
+                Background="{StaticResource SurfaceBrush}" CornerRadius="20"
+                BorderBrush="{StaticResource LineBrush}" BorderThickness="1"
+                HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Grid ClipToBounds="True">
+                <Image gif:ImageBehavior.AnimatedSource="pack://application:,,,/Newtin.Desktop;component/Resources/Animations/loading_animation.gif"
+                       Width="360" Height="360" Opacity="0.38"
+                       HorizontalAlignment="Center" VerticalAlignment="Center"
+                       Stretch="Uniform" IsHitTestVisible="False"
+                       AutomationProperties.Name="Animación de Newtin"/>
+                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                    <StackPanel Margin="36,30" MaxWidth="650" HorizontalAlignment="Center">
+                        <TextBlock Text="Acerca de Newtin" FontSize="30" FontWeight="SemiBold"
+                                   Foreground="{StaticResource TextPrimaryBrush}"
+                                   HorizontalAlignment="Center" TextAlignment="Center"/>
+                        <TextBlock Text="Una solución de diagnóstico y colaboración para equipos Windows"
+                                   FontSize="15" Margin="0,8,0,20"
+                                   Foreground="{StaticResource TextSecondaryBrush}"
+                                   HorizontalAlignment="Center" TextAlignment="Center"
+                                   TextWrapping="Wrap"/>
+
+                        <Border Background="{StaticResource BackgroundBrush}" CornerRadius="12"
+                                Padding="20,16" Margin="0,0,0,14">
+                            <StackPanel>
+                                <TextBlock Text="¿QUÉ ES NEWTIN?" FontSize="11" FontWeight="SemiBold"
+                                           Foreground="{StaticResource TextSecondaryBrush}"/>
+                                <TextBlock Text="Newtin reúne herramientas para conocer el estado de un equipo, diagnosticar problemas de red y facilitar tareas de soporte. Permite consultar información local, comprobar la comunicación con otros equipos y trabajar con carpetas compartidas cuando se cuenta con autorización."
+                                           FontSize="14" LineHeight="22" Margin="0,8,0,0"
+                                           Foreground="{StaticResource TextPrimaryBrush}"
+                                           TextWrapping="Wrap"/>
+                            </StackPanel>
+                        </Border>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="12"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Border Background="{StaticResource BackgroundBrush}" CornerRadius="12"
+                                    Padding="18,14">
+                                <StackPanel>
+                                    <TextBlock Text="DESARROLLADOR" FontSize="10" FontWeight="SemiBold"
+                                               Foreground="{StaticResource TextSecondaryBrush}"/>
+                                    <TextBlock Text="Juan Chen" FontSize="18" FontWeight="SemiBold"
+                                               Margin="0,5,0,0"
+                                               Foreground="{StaticResource TextPrimaryBrush}"/>
+                                </StackPanel>
+                            </Border>
+                            <Border Grid.Column="2" Background="{StaticResource BackgroundBrush}"
+                                    CornerRadius="12" Padding="18,14">
+                                <StackPanel>
+                                    <TextBlock Text="ORGANIZACIÓN" FontSize="10" FontWeight="SemiBold"
+                                               Foreground="{StaticResource TextSecondaryBrush}"/>
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                        <TextBlock Text="GZ GROUP" FontSize="18" FontWeight="SemiBold"
+                                                   Margin="0,5,12,0"
+                                                   Foreground="{StaticResource TextPrimaryBrush}"/>
+                                        <Image Source="pack://application:,,,/Newtin.Desktop;component/Resources/Images/logo_gzgroup.png"
+                                               Width="36" Height="36" Stretch="Uniform"
+                                               AutomationProperties.Name="Logo de GZ Group"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Border>
+                        </Grid>
+                    </StackPanel>
+                </ScrollViewer>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

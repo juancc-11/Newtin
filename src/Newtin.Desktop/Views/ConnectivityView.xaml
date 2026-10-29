@@ -1,0 +1,47 @@
+<UserControl x:Class="Newtin.Desktop.Views.ConnectivityView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel MaxWidth="900" HorizontalAlignment="Left">
+            <Border Background="{StaticResource SurfaceBrush}" CornerRadius="16" Padding="24" Margin="0,0,0,16">
+                <StackPanel>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="16"/>
+                            <ColumnDefinition Width="140"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel>
+                            <TextBlock Text="Equipo remoto (IP o nombre)" Style="{StaticResource FieldLabelStyle}" Margin="0,0,0,6"/>
+                            <TextBox x:Name="HostBox" Style="{StaticResource InputStyle}"
+                                     AutomationProperties.Name="Equipo remoto"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="2">
+                            <TextBlock Text="Puerto TCP" Style="{StaticResource FieldLabelStyle}" Margin="0,0,0,6"/>
+                            <TextBox x:Name="PortBox" Style="{StaticResource InputStyle}"
+                                     AutomationProperties.Name="Puerto TCP"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <TextBlock x:Name="FormError" Visibility="Collapsed" TextWrapping="Wrap" Margin="0,12,0,0"
+                               Foreground="{StaticResource ErrorBrush}"/>
+
+                    <StackPanel Orientation="Horizontal" Margin="0,18,0,0">
+                        <Button x:Name="RunButton" Content="Probar conectividad"
+                                Style="{StaticResource PrimaryButtonStyle}" Click="Run_Click"/>
+                        <Button x:Name="CancelButton" Content="Cancelar" Margin="10,0,0,0"
+                                Style="{StaticResource SecondaryButtonStyle}" Visibility="Collapsed"
+                                Click="Cancel_Click"/>
+                    </StackPanel>
+
+                    <ProgressBar x:Name="LoadingBar" IsIndeterminate="True" Height="4" Margin="0,16,0,0"
+                                 BorderThickness="0" Visibility="Collapsed"
+                                 Foreground="{StaticResource MagentaBrush}"
+                                 Background="{StaticResource LineBrush}"/>
+                </StackPanel>
+            </Border>
+
+            <StackPanel x:Name="ResultsPanel"/>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>
